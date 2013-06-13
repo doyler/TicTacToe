@@ -1,6 +1,7 @@
 import random
 
 def drawBoard(board):
+    print ''
     print '   |   |'
     print ' ' + board[6] + ' | ' + board[7] + ' | ' + board[8]
     print '   |   |'
@@ -16,7 +17,7 @@ def drawBoard(board):
 def selectPlayerLetter():
     letter = ''
     while not (letter == 'X' or letter == 'O'):
-        print 'Do you want to be X or O?'
+        print '\nDo you want to be X or O?',
         letter = raw_input().upper()
     return letter
 
@@ -29,7 +30,7 @@ def determineOrder():
 def playAgain():
     rematch = ''
     while not (rematch == 'yes' or rematch == 'no'):
-        print 'Do you want to play again? (yes or no)'
+        print '\nDo you want to play again (yes or no)?',
         rematch = raw_input().lower()
     return rematch.startswith('y')
 
@@ -58,7 +59,7 @@ def isSpaceFree(board, move):
 def getPlayerMove(board):
     move = ' '
     while move not in '0 1 2 3 4 5 6 7 8'.split() or not isSpaceFree(board, int(move)):
-        print 'What is your next move? (0-8)'
+        print '\nWhat is your next move (0-8)?',
         move = raw_input()
     return int(move)
 
@@ -89,7 +90,7 @@ while True:
     playerLetter = selectPlayerLetter()
     computerLetter = 'O' if playerLetter == 'X' else 'X'
     turn = determineOrder()
-    print('The ' + turn + ' will go first.')
+    print('\nThe ' + turn + ' will go first.')
     gameIsPlaying = True
     while gameIsPlaying:
         if turn == 'player':
@@ -98,12 +99,12 @@ while True:
             makeMove(theBoard, playerLetter, move)
             if isWinner(theBoard, playerLetter):
                 drawBoard(theBoard)
-                print('Hooray! You have won the game!')
+                print('\nHooray! You have won the game!')
                 gameIsPlaying = False
             else:
                 if isBoardFull(theBoard):
                     drawBoard(theBoard)
-                    print('The game is a tie!')
+                    print('\nThe game is a tie!')
                     break
                 else:
                     turn = 'ai'
@@ -112,12 +113,12 @@ while True:
             makeMove(theBoard, computerLetter, move)
             if isWinner(theBoard, computerLetter):
                 drawBoard(theBoard)
-                print('The computer has beaten you! You lose.')
+                print('\nThe computer has beaten you! You lose.')
                 gameIsPlaying = False
             else:
                 if isBoardFull(theBoard):
                     drawBoard(theBoard)
-                    print('The game is a tie!')
+                    print('\nThe game is a tie!')
                     break
                 else:
                     turn = 'player'
